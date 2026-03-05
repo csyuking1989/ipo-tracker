@@ -8,24 +8,24 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: #0f1923;
-            color: #e0e6ed;
+            background: #F5F0E8;
+            color: #2D2B28;
             min-height: 100vh;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         header {
             text-align: center;
             padding: 40px 20px 30px;
-            border-bottom: 1px solid #1e2d3d;
+            border-bottom: 1px solid #E0D8CC;
         }
         header h1 {
             font-size: 28px;
-            color: #4fc3f7;
+            color: #D97757;
             margin-bottom: 8px;
         }
         header .subtitle {
             font-size: 14px;
-            color: #7a8a99;
+            color: #8B7E74;
         }
         .update-info {
             display: flex;
@@ -33,15 +33,15 @@
             align-items: center;
             padding: 16px 0;
             margin: 20px 0;
-            border-bottom: 1px solid #1e2d3d;
+            border-bottom: 1px solid #E0D8CC;
         }
         .update-info .date {
             font-size: 14px;
-            color: #4fc3f7;
+            color: #D97757;
         }
         .update-info .filter-label {
             font-size: 13px;
-            color: #7a8a99;
+            color: #8B7E74;
         }
         .filter-bar {
             display: flex;
@@ -50,16 +50,16 @@
             flex-wrap: wrap;
         }
         .filter-bar select, .filter-bar input {
-            background: #1a2733;
-            border: 1px solid #2a3a4a;
-            color: #e0e6ed;
+            background: #FFFFFF;
+            border: 1px solid #E0D8CC;
+            color: #2D2B28;
             padding: 8px 14px;
             border-radius: 6px;
             font-size: 13px;
         }
         .filter-bar select:focus, .filter-bar input:focus {
             outline: none;
-            border-color: #4fc3f7;
+            border-color: #D97757;
         }
         .stats {
             display: grid;
@@ -68,28 +68,28 @@
             margin-bottom: 28px;
         }
         .stat-card {
-            background: #1a2733;
+            background: #FFFFFF;
             border-radius: 10px;
             padding: 20px;
             text-align: center;
-            border: 1px solid #2a3a4a;
+            border: 1px solid #E0D8CC;
         }
         .stat-card .value {
             font-size: 32px;
             font-weight: 700;
-            color: #4fc3f7;
+            color: #D97757;
         }
         .stat-card .label {
             font-size: 13px;
-            color: #7a8a99;
+            color: #8B7E74;
             margin-top: 4px;
         }
         .section-title {
             font-size: 18px;
-            color: #e0e6ed;
+            color: #2D2B28;
             margin-bottom: 16px;
             padding-left: 12px;
-            border-left: 3px solid #4fc3f7;
+            border-left: 3px solid #D97757;
         }
         .table-wrapper {
             overflow-x: auto;
@@ -101,28 +101,28 @@
             font-size: 14px;
         }
         thead th {
-            background: #1a2733;
-            color: #7a8a99;
+            background: #FFFFFF;
+            color: #8B7E74;
             font-weight: 600;
             text-align: left;
             padding: 12px 16px;
             white-space: nowrap;
-            border-bottom: 2px solid #2a3a4a;
+            border-bottom: 2px solid #E0D8CC;
             cursor: pointer;
             user-select: none;
         }
-        thead th:hover { color: #4fc3f7; }
-        thead th.sorted { color: #4fc3f7; }
+        thead th:hover { color: #D97757; }
+        thead th.sorted { color: #D97757; }
         tbody tr {
-            border-bottom: 1px solid #1e2d3d;
+            border-bottom: 1px solid #EAE3D8;
             transition: background 0.2s;
         }
-        tbody tr:hover { background: #1a2733; }
+        tbody tr:hover { background: #FDFBF7; }
         td { padding: 14px 16px; white-space: nowrap; }
-        .highlight { color: #4fc3f7; font-weight: 600; }
-        .gross-margin-high { color: #66bb6a; font-weight: 700; }
-        .gross-margin-mid { color: #ffa726; font-weight: 600; }
-        .gross-margin-low { color: #ef5350; }
+        .highlight { color: #D97757; font-weight: 600; }
+        .gross-margin-high { color: #4E8B3A; font-weight: 700; }
+        .gross-margin-mid { color: #C67D2E; font-weight: 600; }
+        .gross-margin-low { color: #C44D3D; }
         .badge {
             display: inline-block;
             padding: 3px 10px;
@@ -130,11 +130,11 @@
             font-size: 12px;
             font-weight: 500;
         }
-        .badge-green { background: rgba(102,187,106,0.15); color: #66bb6a; }
-        .badge-blue { background: rgba(79,195,247,0.15); color: #4fc3f7; }
-        .badge-orange { background: rgba(255,167,38,0.15); color: #ffa726; }
-        .badge-gray { background: rgba(122,138,153,0.15); color: #7a8a99; }
-        .badge-red { background: rgba(239,83,80,0.15); color: #ef5350; }
+        .badge-green { background: rgba(78,139,58,0.12); color: #4E8B3A; }
+        .badge-blue { background: rgba(217,119,87,0.12); color: #D97757; }
+        .badge-orange { background: rgba(198,125,46,0.12); color: #C67D2E; }
+        .badge-gray { background: rgba(139,126,116,0.12); color: #8B7E74; }
+        .badge-red { background: rgba(196,77,61,0.12); color: #C44D3D; }
         .market-tag {
             display: inline-block;
             padding: 2px 8px;
@@ -142,24 +142,26 @@
             font-size: 11px;
             font-weight: 500;
         }
-        .market-bse { background: rgba(255,167,38,0.2); color: #ffa726; }
-        .market-star { background: rgba(79,195,247,0.2); color: #4fc3f7; }
-        .market-gem { background: rgba(102,187,106,0.2); color: #66bb6a; }
-        .market-main { background: rgba(122,138,153,0.2); color: #aab5c0; }
+        .market-bse { background: rgba(198,125,46,0.15); color: #C67D2E; }
+        .market-star { background: rgba(217,119,87,0.15); color: #D97757; }
+        .market-gem { background: rgba(78,139,58,0.15); color: #4E8B3A; }
+        .market-main { background: rgba(139,126,116,0.15); color: #8B7E74; }
+        .market-hk { background: rgba(180,70,90,0.15); color: #B4465A; }
+        .market-us { background: rgba(130,80,160,0.15); color: #8250A0; }
         .detail-row { display: none; }
         .detail-row.open { display: table-row; }
         .detail-row td {
-            background: #141e28;
+            background: #FAF6F0;
             padding: 16px 20px;
             white-space: normal;
             line-height: 1.8;
             font-size: 13px;
-            color: #9ab;
+            color: #6B6058;
         }
         .progress-bar {
             width: 100px;
             height: 8px;
-            background: #1e2d3d;
+            background: #E0D8CC;
             border-radius: 4px;
             overflow: hidden;
             display: inline-block;
@@ -174,20 +176,20 @@
         footer {
             text-align: center;
             padding: 30px;
-            color: #4a5a6a;
+            color: #8B7E74;
             font-size: 12px;
-            border-top: 1px solid #1e2d3d;
+            border-top: 1px solid #E0D8CC;
             margin-top: 20px;
         }
-        footer a { color: #4fc3f7; text-decoration: none; }
+        footer a { color: #D97757; text-decoration: none; }
         .no-data {
             text-align: center;
             padding: 60px 20px;
-            color: #4a5a6a;
+            color: #8B7E74;
             font-size: 16px;
         }
         .update-btn {
-            background: linear-gradient(135deg, #1a73e8, #4fc3f7);
+            background: linear-gradient(135deg, #C4643F, #D97757);
             color: #fff;
             border: none;
             padding: 8px 20px;
@@ -231,12 +233,12 @@
             transform: translateX(120%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             max-width: 380px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
         .toast.show { transform: translateX(0); }
-        .toast.success { background: #1b5e20; border: 1px solid #388e3c; }
-        .toast.error { background: #b71c1c; border: 1px solid #d32f2f; }
-        .toast.info { background: #0d47a1; border: 1px solid #1565c0; }
+        .toast.success { background: #3D7A2E; border: 1px solid #4E8B3A; }
+        .toast.error { background: #A83A2A; border: 1px solid #C44D3D; }
+        .toast.info { background: #C4643F; border: 1px solid #D97757; }
         @media (max-width: 768px) {
             .container { padding: 12px; }
             header h1 { font-size: 22px; }
@@ -249,7 +251,7 @@
     <div class="container">
         <header>
             <h1>IPO Tracker - 高毛利率即将上市企业</h1>
-            <div class="subtitle">筛选条件：一个月内准备上市 + 毛利率 &gt; 40% | 数据来源：公开招股说明书、交易所公告</div>
+            <div class="subtitle">A股 / 港股 / 美股 全市场IPO追踪 | 筛选条件：毛利率 &gt; 40% | 数据来源：东方财富、交易所公告</div>
         </header>
 
         <div class="update-info">
@@ -329,13 +331,16 @@
         </div>
 
         <footer>
-            <p>数据来源：上交所、深交所、北交所官方公告 | 东方财富网 | 各公司招股说明书</p>
+            <p>数据来源：上交所、深交所、北交所、港交所、SEC 官方公告 | 东方财富网 | 各公司招股说明书</p>
             <p style="margin-top: 6px;">免责声明：本页面仅供信息参考，不构成投资建议。数据可能存在滞后，请以官方披露为准。</p>
             <p style="margin-top: 6px;">
-                <a href="https://www.sse.com.cn/ipo/listing/" target="_blank">上交所IPO专区</a> |
-                <a href="https://www.szse.cn/disclosure/listed/notice/index.html" target="_blank">深交所信息披露</a> |
+                <a href="https://www.sse.com.cn/ipo/listing/" target="_blank">上交所</a> |
+                <a href="https://www.szse.cn/disclosure/listed/notice/index.html" target="_blank">深交所</a> |
                 <a href="https://www.bse.cn" target="_blank">北交所</a> |
-                <a href="https://data.eastmoney.com/xg/" target="_blank">东方财富新股数据</a>
+                <a href="https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities?sc_lang=zh-HK" target="_blank">港交所</a> |
+                <a href="https://data.eastmoney.com/xg/" target="_blank">东方财富新股</a> |
+                <a href="https://data.eastmoney.com/ipo/hk.html" target="_blank">港股IPO</a> |
+                <a href="https://data.eastmoney.com/ipo/us.html" target="_blank">美股IPO</a>
             </p>
         </footer>
     </div>
@@ -344,7 +349,7 @@
     // === IPO 数据 ===
     // 每日更新此数据即可刷新页面
     const IPO_DATA = {
-        updateDate: "2026-03-05 17:12",
+        updateDate: "2026-03-06 01:20",
         companies: [
             {
                 name: "海菲曼 (HIFIMAN)",
@@ -534,6 +539,314 @@
                 ipoDate: "2026-Q2",
                 募资: null,
                 description: "电气设备企业，2026年3月10日上会。详细财务数据待招股说明书披露。"
+            },
+            // ── 港股 IPO ──────────────────────────
+            {
+                name: "兆威机电",
+                code: "02692.HK",
+                market: "港股",
+                industry: "微型驱动系统/人形机器人",
+                grossMargin: 32.0,
+                grossMarginHistory: "30%+(近年稳步上升，汽车高毛利占比提升)",
+                revenue: null,
+                revenueYear: "2025",
+                netProfit: null,
+                issuePrice: "HK$73.68",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2026-03-09",
+                募资: "约19.7亿港元",
+                description: "微型驱动系统方案解决商，特斯拉灵巧手核心供应商。A+H上市，AH溢价87%。基石投资者包括高瓴资本、未来资产、高毅资产、淡马锡系等。25年营收同比增长19%。",
+                highlight: false
+            },
+            {
+                name: "埃斯顿",
+                code: "02715.HK",
+                market: "港股",
+                industry: "工业机器人/自动化",
+                grossMargin: 30.0,
+                grossMarginHistory: "海外毛利率30%+，整体因竞争激烈持续下行",
+                revenue: null,
+                revenueYear: "2025",
+                netProfit: null,
+                issuePrice: "HK$15.36-17.00",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2026-03-09",
+                募资: "约14.9-16.5亿港元",
+                description: "中国工业机器人龙头，国内出货量第一。2025上半年首次超越外资品牌登顶中国市场。按2024年收入计全球排名第六。H股较A股折价约40%。",
+                highlight: false
+            },
+            {
+                name: "美格智能",
+                code: "03268.HK",
+                market: "港股",
+                industry: "无线通信模组/AI",
+                grossMargin: null,
+                grossMarginHistory: "毛利率下行，产品涨价跑不赢存储涨价",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: "HK$≤28.86",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2026-03-10",
+                募资: "约10.1亿港元",
+                description: "全球领先无线通信模组及解决方案提供商，高算力智能模组为核心。应用于泛物联网、智能网联车及无线宽带领域，正积极拓展机器人等端侧AI应用。基石投资者占比45%。",
+                highlight: false
+            },
+            {
+                name: "优乐赛共享",
+                code: "02649.HK",
+                market: "港股",
+                industry: "循环包装/汽车供应链",
+                grossMargin: 20.8,
+                grossMarginHistory: "19.7%(2022) → 21.4%(2023) → 22.0%(2024) → 20.8%(2025H1)",
+                revenue: 5.33,
+                revenueYear: "2025前8月",
+                netProfit: 0.27,
+                issuePrice: "HK$≤14.00",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2026-03-09",
+                募资: "约2.8亿港元",
+                description: "中国汽车共享运营服务市场最大提供商(市占率8.2%)。循环包装服务第二大提供商。孖展认购超620倍。",
+                highlight: false
+            },
+            {
+                name: "胜宏科技",
+                code: null,
+                market: "港股",
+                industry: "PCB/AI算力",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "已递表",
+                ipoDate: "2026-H1",
+                募资: null,
+                description: "2025上半年AI及高性能算力PCB收入全球第一。A股市值超2553亿人民币(300476.SZ)。摩根大通、中信建投国际联席保荐。",
+                highlight: true
+            },
+            {
+                name: "特锐德",
+                code: null,
+                market: "港股",
+                industry: "充电桩/电气设备",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: 153.74,
+                revenueYear: "2024",
+                netProfit: 9.39,
+                issuePrice: null,
+                pe: null,
+                status: "已递表",
+                ipoDate: "2026-H1",
+                募资: null,
+                description: "全球最大高压预制舱变电站制造商、中国最大电动汽车充电设备制造商及充电网运营商。A股代码300001。中国银河国际、广发证券联席保荐。",
+                highlight: false
+            },
+            {
+                name: "中文在线",
+                code: null,
+                market: "港股",
+                industry: "网络文学/短剧/IP",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: 11.59,
+                revenueYear: "2024",
+                netProfit: -2.43,
+                issuePrice: null,
+                pe: null,
+                status: "已递表",
+                ipoDate: "2026-H1",
+                募资: null,
+                description: "深耕行业逾25年，数字内容资源库超560万种。核心业务聚焦网络文学、短剧及IP衍生品。独家保荐人花旗。A股代码300364。",
+                highlight: false
+            },
+            {
+                name: "立讯精密",
+                code: null,
+                market: "港股",
+                industry: "消费电子/汽车零部件",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "已递表",
+                ipoDate: "2026-H1",
+                募资: null,
+                description: "全球消费电子精密制造龙头，苹果核心供应商。A+H上市申请。",
+                highlight: true
+            },
+            {
+                name: "广合科技",
+                code: null,
+                market: "港股",
+                industry: "PCB/AI算力",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "已通过聆讯",
+                ipoDate: "2026-Q1",
+                募资: null,
+                description: "全球AI算力PCB龙头企业，A股市值超500亿人民币。中信证券、汇丰联席保荐。已通过港交所聆讯。",
+                highlight: true
+            },
+            // ── 美股 IPO ──────────────────────────
+            {
+                name: "Generate Biomedicines",
+                code: "GENB",
+                market: "美股",
+                industry: "AI生物科技/药物研发",
+                grossMargin: null,
+                grossMarginHistory: "临床阶段，尚无产品收入",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: "$16.00",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2026-02-27",
+                募资: "$4亿",
+                description: "2024年以来最大生物科技IPO。利用AI技术革新药物设计，核心管线抗TSLP抗体GB-0895正进行三期哮喘试验。Amgen签$19亿合作、Novartis签$10亿合作。高盛和摩根士丹利联合主承销。",
+                highlight: true
+            },
+            {
+                name: "Rank One Computing",
+                code: "ROC",
+                market: "美股",
+                industry: "AI生物识别/视频分析",
+                grossMargin: 81.0,
+                grossMarginHistory: "过去12个月毛利率81%",
+                revenue: 0.16,
+                revenueYear: "TTM",
+                netProfit: null,
+                issuePrice: "$6.00",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2026-02-20",
+                募资: "$2400万",
+                description: "2026年首个生物识别IPO。开发面部识别、指纹和视频分析AI软件，服务国防、公共安全和数字商务。NIST ELFT指纹测试全球第一。毛利率高达81%。",
+                highlight: true
+            },
+            {
+                name: "SharonAI Holdings",
+                code: "SHAZ",
+                market: "美股",
+                industry: "AI基础设施/数据中心",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: "$30.00",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2026-02-18",
+                募资: "$1.25亿",
+                description: "数据中心部署及人工智能基础设施公司。纳斯达克上市。",
+                highlight: false
+            },
+            {
+                name: "CCSC Technology",
+                code: "CCTG",
+                market: "美股",
+                industry: "互连产品/连接器",
+                grossMargin: null,
+                grossMarginHistory: "待更新",
+                revenue: 0.08,
+                revenueYear: "2025H1",
+                netProfit: -0.01,
+                issuePrice: "$4.00",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2024-01-18",
+                募资: "$632万",
+                description: "中概股，设计制造互连产品(连接器、电缆、线束)，应用于工业、汽车、机器人、医疗设备等。2026年1月实施1:10反向拆股。",
+                highlight: false
+            },
+            {
+                name: "Discord",
+                code: null,
+                market: "美股",
+                industry: "社交/通讯平台",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "已递交S-1",
+                ipoDate: "2026-Q1~Q2",
+                募资: null,
+                description: "全球最大游戏社交通讯平台。已向SEC秘密提交IPO文件，高盛和摩根大通担任主承销商。最早可能2026年3月上市。",
+                highlight: true
+            },
+            {
+                name: "SpaceX",
+                code: null,
+                market: "美股",
+                industry: "航天/卫星互联网",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "计划中",
+                ipoDate: "2026-H1",
+                募资: null,
+                description: "马斯克已确认公司打算今年上市，最早可能6月。已与xAI合并以增强上市前景。全球最大商业航天公司、Starlink卫星互联网运营商。",
+                highlight: true
+            },
+            {
+                name: "OpenAI",
+                code: null,
+                market: "美股",
+                industry: "AI/大语言模型",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "计划中",
+                ipoDate: "2026-Q4",
+                募资: null,
+                description: "ChatGPT开发商，估值$5000亿。华尔街历史上最受期待的IPO之一。据WSJ报道正准备第四季度上市。",
+                highlight: true
+            },
+            {
+                name: "Anthropic",
+                code: null,
+                market: "美股",
+                industry: "AI/大语言模型",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "筹备中",
+                ipoDate: "2026",
+                募资: null,
+                description: "Claude AI开发商。据FT报道已聘请Wilson Sonsini律所为IPO做准备，可能最早2026年上市。",
+                highlight: true
             }
         ]
     };
@@ -544,6 +857,39 @@
         renderStats();
         renderTables();
         bindEvents();
+        // 从API加载港股、美股等实时数据并合并
+        loadApiData();
+    }
+
+    async function loadApiData() {
+        try {
+            const resp = await fetch('/api/data');
+            const data = await resp.json();
+            if (data.success && data.companies && data.companies.length > 0) {
+                // 用 name+code 去重，保留本地手工维护的详细数据
+                const existingKeys = new Set(
+                    IPO_DATA.companies.map(c => c.name + '|' + (c.code || ''))
+                );
+                let added = 0;
+                for (const c of data.companies) {
+                    const key = c.name + '|' + (c.code || '');
+                    if (!existingKeys.has(key)) {
+                        IPO_DATA.companies.push(c);
+                        existingKeys.add(key);
+                        added++;
+                    }
+                }
+                if (added > 0) {
+                    console.log(`[IPO Tracker] 从API加载了 ${added} 条新数据（共${data.total}条）`);
+                    IPO_DATA.updateDate = data.time;
+                    document.getElementById("updateDate").textContent = `最后更新：${data.time}（含API数据）`;
+                    renderStats();
+                    renderTables();
+                }
+            }
+        } catch (e) {
+            console.log('[IPO Tracker] API未连接，仅显示本地数据');
+        }
     }
 
     function renderStats() {
@@ -558,7 +904,7 @@
                 <div class="label">近期IPO企业总数</div>
             </div>
             <div class="stat-card">
-                <div class="value" style="color: #66bb6a;">${qualified.length}</div>
+                <div class="value" style="color: #4E8B3A;">${qualified.length}</div>
                 <div class="label">毛利率 > 40% 企业</div>
             </div>
             <div class="stat-card">
@@ -577,6 +923,8 @@
         if (market === '北交所') return 'market-bse';
         if (market === '科创板') return 'market-star';
         if (market === '创业板') return 'market-gem';
+        if (market === '港股') return 'market-hk';
+        if (market === '美股') return 'market-us';
         return 'market-main';
     }
 
@@ -596,7 +944,7 @@
 
     function renderMarginBar(margin) {
         if (!margin) return '-';
-        const color = margin > 40 ? '#66bb6a' : margin > 25 ? '#ffa726' : '#ef5350';
+        const color = margin > 40 ? '#4E8B3A' : margin > 25 ? '#C67D2E' : '#C44D3D';
         const width = Math.min(margin, 100);
         return `
             <span class="${getMarginClass(margin)}">${margin.toFixed(1)}%</span>
@@ -609,8 +957,8 @@
             <tr onclick="toggleDetail(${idx})" style="cursor:pointer">
                 <td>
                     <span class="highlight">${c.name}</span>
-                    ${c.highlight ? ' <span style="color:#ffa726;font-size:11px">★</span>' : ''}
-                    ${c.code ? `<br><span style="color:#4a5a6a;font-size:11px">${c.code}</span>` : ''}
+                    ${c.highlight ? ' <span style="color:#D97757;font-size:11px">★</span>' : ''}
+                    ${c.code ? `<br><span style="color:#8B7E74;font-size:11px">${c.code}</span>` : ''}
                 </td>
                 <td><span class="market-tag ${getMarketClass(c.market)}">${c.market}</span></td>
                 <td>${c.industry}</td>
