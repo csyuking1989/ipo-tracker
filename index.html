@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO追踪 - 高毛利率即将上市企业</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0f1923;
+            color: #e0e6ed;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            border-bottom: 1px solid #1e2d3d;
+        }
+        header h1 {
+            font-size: 28px;
+            color: #4fc3f7;
+            margin-bottom: 8px;
+        }
+        header .subtitle {
+            font-size: 14px;
+            color: #7a8a99;
+        }
+        .update-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            margin: 20px 0;
+            border-bottom: 1px solid #1e2d3d;
+        }
+        .update-info .date {
+            font-size: 14px;
+            color: #4fc3f7;
+        }
+        .update-info .filter-label {
+            font-size: 13px;
+            color: #7a8a99;
+        }
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .filter-bar select, .filter-bar input {
+            background: #1a2733;
+            border: 1px solid #2a3a4a;
+            color: #e0e6ed;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .filter-bar select:focus, .filter-bar input:focus {
+            outline: none;
+            border-color: #4fc3f7;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: #1a2733;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #2a3a4a;
+        }
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4fc3f7;
+        }
+        .stat-card .label {
+            font-size: 13px;
+            color: #7a8a99;
+            margin-top: 4px;
+        }
+        .section-title {
+            font-size: 18px;
+            color: #e0e6ed;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 3px solid #4fc3f7;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 32px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        thead th {
+            background: #1a2733;
+            color: #7a8a99;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            white-space: nowrap;
+            border-bottom: 2px solid #2a3a4a;
+            cursor: pointer;
+            user-select: none;
+        }
+        thead th:hover { color: #4fc3f7; }
+        thead th.sorted { color: #4fc3f7; }
+        tbody tr {
+            border-bottom: 1px solid #1e2d3d;
+            transition: background 0.2s;
+        }
+        tbody tr:hover { background: #1a2733; }
+        td { padding: 14px 16px; white-space: nowrap; }
+        .highlight { color: #4fc3f7; font-weight: 600; }
+        .gross-margin-high { color: #66bb6a; font-weight: 700; }
+        .gross-margin-mid { color: #ffa726; font-weight: 600; }
+        .gross-margin-low { color: #ef5350; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .badge-green { background: rgba(102,187,106,0.15); color: #66bb6a; }
+        .badge-blue { background: rgba(79,195,247,0.15); color: #4fc3f7; }
+        .badge-orange { background: rgba(255,167,38,0.15); color: #ffa726; }
+        .badge-gray { background: rgba(122,138,153,0.15); color: #7a8a99; }
+        .badge-red { background: rgba(239,83,80,0.15); color: #ef5350; }
+        .market-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .market-bse { background: rgba(255,167,38,0.2); color: #ffa726; }
+        .market-star { background: rgba(79,195,247,0.2); color: #4fc3f7; }
+        .market-gem { background: rgba(102,187,106,0.2); color: #66bb6a; }
+        .market-main { background: rgba(122,138,153,0.2); color: #aab5c0; }
+        .detail-row { display: none; }
+        .detail-row.open { display: table-row; }
+        .detail-row td {
+            background: #141e28;
+            padding: 16px 20px;
+            white-space: normal;
+            line-height: 1.8;
+            font-size: 13px;
+            color: #9ab;
+        }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: #1e2d3d;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #4a5a6a;
+            font-size: 12px;
+            border-top: 1px solid #1e2d3d;
+            margin-top: 20px;
+        }
+        footer a { color: #4fc3f7; text-decoration: none; }
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #4a5a6a;
+            font-size: 16px;
+        }
+        .update-btn {
+            background: linear-gradient(135deg, #1a73e8, #4fc3f7);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .update-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+        .update-btn:active { transform: translateY(0); }
+        .update-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .update-btn .spinner {
+            display: none;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .update-btn.loading .spinner { display: inline-block; }
+        .update-btn.loading .btn-text { display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 22px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #fff;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 380px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { background: #1b5e20; border: 1px solid #388e3c; }
+        .toast.error { background: #b71c1c; border: 1px solid #d32f2f; }
+        .toast.info { background: #0d47a1; border: 1px solid #1565c0; }
+        @media (max-width: 768px) {
+            .container { padding: 12px; }
+            header h1 { font-size: 22px; }
+            td, th { padding: 10px 8px; font-size: 13px; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IPO Tracker - 高毛利率即将上市企业</h1>
+            <div class="subtitle">筛选条件：一个月内准备上市 + 毛利率 &gt; 40% | 数据来源：公开招股说明书、交易所公告</div>
+        </header>
+
+        <div class="update-info">
+            <div class="date" id="updateDate">最后更新：加载中...</div>
+            <div style="display:flex;align-items:center;gap:16px;">
+                <div class="filter-label">仅显示毛利率 &gt; 40% 的企业</div>
+                <button class="update-btn" id="updateBtn" onclick="manualUpdate()">
+                    <span class="btn-text">手动更新</span>
+                    <span class="spinner"></span>
+                </button>
+            </div>
+        </div>
+        <div class="toast" id="toast"></div>
+
+        <div class="stats" id="statsCards"></div>
+
+        <div class="filter-bar">
+            <select id="marketFilter">
+                <option value="all">全部板块</option>
+                <option value="北交所">北交所</option>
+                <option value="科创板">科创板</option>
+                <option value="创业板">创业板</option>
+                <option value="沪市主板">沪市主板</option>
+                <option value="深市主板">深市主板</option>
+                <option value="美股">美股</option>
+                <option value="港股">港股</option>
+            </select>
+            <select id="sortField">
+                <option value="grossMargin">按毛利率排序</option>
+                <option value="name">按名称排序</option>
+                <option value="ipoDate">按上市日期排序</option>
+                <option value="revenue">按营收排序</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="搜索公司名称或行业..." />
+        </div>
+
+        <h2 class="section-title">符合条件的企业（毛利率 &gt; 40%）</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>公司名称</th>
+                        <th>板块</th>
+                        <th>行业</th>
+                        <th>毛利率</th>
+                        <th>营收(亿)</th>
+                        <th>净利润(亿)</th>
+                        <th>发行价</th>
+                        <th>市盈率</th>
+                        <th>IPO状态</th>
+                        <th>预计上市</th>
+                    </tr>
+                </thead>
+                <tbody id="qualifiedTable"></tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 40px;">其他近期IPO企业（毛利率 ≤ 40%）</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>公司名称</th>
+                        <th>板块</th>
+                        <th>行业</th>
+                        <th>毛利率</th>
+                        <th>营收(亿)</th>
+                        <th>净利润(亿)</th>
+                        <th>发行价</th>
+                        <th>市盈率</th>
+                        <th>IPO状态</th>
+                        <th>预计上市</th>
+                    </tr>
+                </thead>
+                <tbody id="otherTable"></tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>数据来源：上交所、深交所、北交所官方公告 | 东方财富网 | 各公司招股说明书</p>
+            <p style="margin-top: 6px;">免责声明：本页面仅供信息参考，不构成投资建议。数据可能存在滞后，请以官方披露为准。</p>
+            <p style="margin-top: 6px;">
+                <a href="https://www.sse.com.cn/ipo/listing/" target="_blank">上交所IPO专区</a> |
+                <a href="https://www.szse.cn/disclosure/listed/notice/index.html" target="_blank">深交所信息披露</a> |
+                <a href="https://www.bse.cn" target="_blank">北交所</a> |
+                <a href="https://data.eastmoney.com/xg/" target="_blank">东方财富新股数据</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+    // === IPO 数据 ===
+    // 每日更新此数据即可刷新页面
+    const IPO_DATA = {
+        updateDate: "2026-03-05 17:12",
+        companies: [
+            {
+                name: "海菲曼 (HIFIMAN)",
+                code: "920183",
+                market: "北交所",
+                industry: "高端电声/消费电子",
+                grossMargin: 70.1,
+                grossMarginHistory: "65.06%(2022) → 68.18%(2023) → 70.1%(2024)",
+                revenue: 2.27,
+                revenueYear: "2024",
+                netProfit: 0.67,
+                issuePrice: "19.71元",
+                pe: 13.59,
+                status: "已上市",
+                ipoDate: "2026-03",
+                募资: "4.3亿",
+                description: "国产高端音频器材头部品牌，主营HIFIMAN品牌头戴式耳机、真无线耳机等。核心元器件自研自产，毛利率远超同行均值（行业约35%）。头戴式耳机毛利率约75%。",
+                highlight: true
+            },
+            {
+                name: "摩尔线程",
+                code: "688364",
+                market: "科创板",
+                industry: "GPU芯片/AI算力",
+                grossMargin: 70.71,
+                grossMarginHistory: "-70.08%(2022) → 25.87%(2023) → 70.71%(2024)",
+                revenue: 4.38,
+                revenueYear: "2024",
+                netProfit: -15.0,
+                issuePrice: "114.28元",
+                pe: null,
+                status: "已上市",
+                ipoDate: "2025-12",
+                募资: "80亿",
+                description: "\"国产GPU第一股\"。四代GPU架构覆盖AI智算、云计算和个人智算领域。2024年毛利率跃升至70.71%，但仍处亏损状态，预计2027年盈利。AI智算产品收入占比94.85%。",
+                highlight: true
+            },
+            {
+                name: "固德电材",
+                code: "301680",
+                market: "创业板",
+                industry: "新能源汽车/热防护",
+                grossMargin: 37.73,
+                grossMarginHistory: "28.02%(2022) → 33.14%(2023) → 37.73%(2024)",
+                revenue: 9.08,
+                revenueYear: "2024",
+                netProfit: 1.73,
+                issuePrice: "58.00元",
+                pe: 20.82,
+                status: "已发行",
+                ipoDate: "2026-03",
+                募资: "12亿",
+                description: "新能源汽车动力电池热失控防护零部件龙头。毛利率逐年提升但2025H1回落至33.92%，主因外销收入占比下降。云母材料防护领域市占率第二。"
+            },
+            {
+                name: "觅睿科技",
+                code: "920036",
+                market: "北交所",
+                industry: "智能安防/物联网",
+                grossMargin: 35.83,
+                grossMarginHistory: "约36%(2025前三季度)",
+                revenue: 5.49,
+                revenueYear: "2025前三季度",
+                netProfit: 0.51,
+                issuePrice: "21.52元",
+                pe: 14.3,
+                status: "已上市",
+                ipoDate: "2026-03",
+                募资: "约3亿",
+                description: "国家级专精特新\"小巨人\"，主营智能网络摄像机及物联网视频产品。产品入驻沃尔玛、亚马逊、塔吉特等。全球智能民用安防市场年复合增长率约15%。"
+            },
+            {
+                name: "通领科技",
+                code: "920187",
+                market: "北交所",
+                industry: "汽车内饰件",
+                grossMargin: 22.0,
+                grossMarginHistory: "整体约22%，外销毛利较高",
+                revenue: 9.71,
+                revenueYear: "2025",
+                netProfit: 1.47,
+                issuePrice: "29.62元",
+                pe: 14.47,
+                status: "已上市",
+                ipoDate: "2026-02",
+                募资: "约4.6亿",
+                description: "国内汽车内饰件主要供应商。主要产品包括门板饰条、主仪表饰板、中控饰板等。外销收入增长带动利润提升。"
+            },
+            {
+                name: "通宝光电",
+                code: "920168",
+                market: "北交所",
+                industry: "汽车电子零部件",
+                grossMargin: 25.0,
+                grossMarginHistory: "EPS控制器毛利率下滑明显(23.61%→6.88%)",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: "16.17元",
+                pe: 14.99,
+                status: "已上市",
+                ipoDate: "2026-02-26",
+                募资: null,
+                description: "汽车照明系统、电子控制系统、能源管理系统等汽车电子零部件制造商。上市首日涨70%。EPS控制器毛利率呈下降趋势。"
+            },
+            {
+                name: "晨光电机",
+                code: "874468",
+                market: "北交所",
+                industry: "微特电机/清洁电器",
+                grossMargin: 19.73,
+                grossMarginHistory: "23.23%(2022) → 22.83%(2023) → 19.73%(2024)",
+                revenue: 8.27,
+                revenueYear: "2024",
+                netProfit: 0.79,
+                issuePrice: null,
+                pe: null,
+                status: "已过会",
+                ipoDate: "2026-03~04",
+                募资: "3.99亿",
+                description: "2026年首家IPO过会企业。专精特新\"小巨人\"，主营吸尘器微特电机。客户包括石头科技、追觅、小米、美的等。毛利率持续下滑是主要风险点。"
+            },
+            {
+                name: "中科仪",
+                code: "830852",
+                market: "北交所",
+                industry: "半导体设备/真空泵",
+                grossMargin: 28.15,
+                grossMarginHistory: "32.60%(2022) → 33.02%(2023) → 29.44%(2024) → 28.15%(2025H1)",
+                revenue: 10.82,
+                revenueYear: "2024",
+                netProfit: 1.93,
+                issuePrice: null,
+                pe: null,
+                status: "待发行",
+                ipoDate: "2026-03~04",
+                募资: "8.25亿",
+                description: "集成电路领域出货量最大的国产干式真空泵制造商，唯一在先进制程实现批量应用的国产企业。打破欧美日长期垄断，满足14nm及128层以上3D NAND工艺需求。"
+            },
+            {
+                name: "赛英电子",
+                code: null,
+                market: "北交所",
+                industry: "功率半导体配套",
+                grossMargin: 31.53,
+                grossMarginHistory: "33.02%(2022) → 31.36%(2023) → 30.09%(2024) → 31.53%(2025H1)",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "已过会",
+                ipoDate: "2026-Q1~Q2",
+                募资: null,
+                description: "主营功率半导体配套产品（封装散热基板等）。毛利率高于同行均值8个百分点，但存在\"高毛利率+低研发投入\"争议。前五大客户占收入约80%。"
+            },
+            {
+                name: "至信股份",
+                code: null,
+                market: "沪市主板",
+                industry: "汽车零部件",
+                grossMargin: 22.0,
+                grossMarginHistory: "高于同业均值20.54%",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: "21.88元",
+                pe: 26.85,
+                status: "申购中",
+                ipoDate: "2026-03",
+                募资: null,
+                description: "汽车冲压零部件供应商。毛利率处于同业中高位区间。可比公司包括华达科技、多利科技等。"
+            },
+            {
+                name: "朗信电气",
+                code: null,
+                market: "待定",
+                industry: "电气设备",
+                grossMargin: null,
+                grossMarginHistory: "待披露",
+                revenue: null,
+                revenueYear: null,
+                netProfit: null,
+                issuePrice: null,
+                pe: null,
+                status: "3月10日上会",
+                ipoDate: "2026-Q2",
+                募资: null,
+                description: "电气设备企业，2026年3月10日上会。详细财务数据待招股说明书披露。"
+            }
+        ]
+    };
+
+    // === 渲染逻辑 ===
+    function init() {
+        document.getElementById("updateDate").textContent = `最后更新：${IPO_DATA.updateDate}`;
+        renderStats();
+        renderTables();
+        bindEvents();
+    }
+
+    function renderStats() {
+        const companies = IPO_DATA.companies;
+        const qualified = companies.filter(c => c.grossMargin && c.grossMargin > 40);
+        const total = companies.length;
+        const avgMargin = companies.filter(c => c.grossMargin).reduce((s, c) => s + c.grossMargin, 0) / companies.filter(c => c.grossMargin).length;
+
+        const statsHtml = `
+            <div class="stat-card">
+                <div class="value">${total}</div>
+                <div class="label">近期IPO企业总数</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" style="color: #66bb6a;">${qualified.length}</div>
+                <div class="label">毛利率 > 40% 企业</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">${avgMargin.toFixed(1)}%</div>
+                <div class="label">平均毛利率</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">${companies.filter(c => c.status === '已上市' || c.status === '已发行').length}</div>
+                <div class="label">已上市/已发行</div>
+            </div>
+        `;
+        document.getElementById("statsCards").innerHTML = statsHtml;
+    }
+
+    function getMarketClass(market) {
+        if (market === '北交所') return 'market-bse';
+        if (market === '科创板') return 'market-star';
+        if (market === '创业板') return 'market-gem';
+        return 'market-main';
+    }
+
+    function getMarginClass(margin) {
+        if (!margin) return '';
+        if (margin > 40) return 'gross-margin-high';
+        if (margin > 25) return 'gross-margin-mid';
+        return 'gross-margin-low';
+    }
+
+    function getStatusBadge(status) {
+        if (status === '已上市') return 'badge-green';
+        if (status === '已发行' || status === '申购中') return 'badge-blue';
+        if (status === '已过会' || status === '待发行') return 'badge-orange';
+        return 'badge-gray';
+    }
+
+    function renderMarginBar(margin) {
+        if (!margin) return '-';
+        const color = margin > 40 ? '#66bb6a' : margin > 25 ? '#ffa726' : '#ef5350';
+        const width = Math.min(margin, 100);
+        return `
+            <span class="${getMarginClass(margin)}">${margin.toFixed(1)}%</span>
+            <div class="progress-bar"><div class="fill" style="width:${width}%;background:${color}"></div></div>
+        `;
+    }
+
+    function renderRow(c, idx) {
+        return `
+            <tr onclick="toggleDetail(${idx})" style="cursor:pointer">
+                <td>
+                    <span class="highlight">${c.name}</span>
+                    ${c.highlight ? ' <span style="color:#ffa726;font-size:11px">★</span>' : ''}
+                    ${c.code ? `<br><span style="color:#4a5a6a;font-size:11px">${c.code}</span>` : ''}
+                </td>
+                <td><span class="market-tag ${getMarketClass(c.market)}">${c.market}</span></td>
+                <td>${c.industry}</td>
+                <td>${renderMarginBar(c.grossMargin)}</td>
+                <td>${c.revenue ? c.revenue.toFixed(2) : '-'}</td>
+                <td>${c.netProfit != null ? c.netProfit.toFixed(2) : '-'}</td>
+                <td>${c.issuePrice || '-'}</td>
+                <td>${c.pe ? c.pe.toFixed(1) + 'x' : '-'}</td>
+                <td><span class="badge ${getStatusBadge(c.status)}">${c.status}</span></td>
+                <td>${c.ipoDate || '-'}</td>
+            </tr>
+            <tr class="detail-row" id="detail-${idx}">
+                <td colspan="10">
+                    <strong>毛利率趋势：</strong>${c.grossMarginHistory}<br>
+                    <strong>募资金额：</strong>${c.募资 || '待定'}<br>
+                    <strong>简介：</strong>${c.description}
+                </td>
+            </tr>
+        `;
+    }
+
+    function renderTables() {
+        const market = document.getElementById("marketFilter").value;
+        const sort = document.getElementById("sortField").value;
+        const search = document.getElementById("searchInput").value.toLowerCase();
+
+        let companies = IPO_DATA.companies.filter(c => {
+            if (market !== 'all' && c.market !== market) return false;
+            if (search && !c.name.toLowerCase().includes(search) && !c.industry.toLowerCase().includes(search)) return false;
+            return true;
+        });
+
+        // Sort
+        companies.sort((a, b) => {
+            if (sort === 'grossMargin') return (b.grossMargin || 0) - (a.grossMargin || 0);
+            if (sort === 'name') return a.name.localeCompare(b.name, 'zh');
+            if (sort === 'revenue') return (b.revenue || 0) - (a.revenue || 0);
+            if (sort === 'ipoDate') return (a.ipoDate || '').localeCompare(b.ipoDate || '');
+            return 0;
+        });
+
+        const qualified = companies.filter(c => c.grossMargin && c.grossMargin > 40);
+        const others = companies.filter(c => !c.grossMargin || c.grossMargin <= 40);
+
+        const qTable = document.getElementById("qualifiedTable");
+        const oTable = document.getElementById("otherTable");
+
+        if (qualified.length === 0) {
+            qTable.innerHTML = '<tr><td colspan="10" class="no-data">暂无毛利率 > 40% 的即将上市企业</td></tr>';
+        } else {
+            qTable.innerHTML = qualified.map((c, i) => renderRow(c, i)).join('');
+        }
+
+        oTable.innerHTML = others.map((c, i) => renderRow(c, qualified.length + i)).join('');
+    }
+
+    function toggleDetail(idx) {
+        const el = document.getElementById('detail-' + idx);
+        if (el) el.classList.toggle('open');
+    }
+
+    function bindEvents() {
+        document.getElementById("marketFilter").addEventListener("change", renderTables);
+        document.getElementById("sortField").addEventListener("change", renderTables);
+        document.getElementById("searchInput").addEventListener("input", renderTables);
+    }
+
+    function showToast(message, type = 'info') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast ' + type;
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    async function manualUpdate() {
+        const btn = document.getElementById('updateBtn');
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        try {
+            const resp = await fetch('/api/update');
+            const data = await resp.json();
+            if (data.success) {
+                showToast(data.message, 'success');
+                document.getElementById('updateDate').textContent = '最后更新：' + data.time;
+                // 1.5秒后刷新页面加载最新数据
+                setTimeout(() => location.reload(), 1500);
+            } else {
+                showToast('更新失败：' + data.message, 'error');
+            }
+        } catch (e) {
+            showToast('请先启动本地服务：python3 server.py', 'error');
+        } finally {
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+</html>
